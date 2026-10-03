@@ -1,15 +1,17 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Careers() {
   return (
     <section className="w-full bg-white pt-[60px] pb-16 md:py-20 lg:py-24 px-5 select-none">
       <div className="w-full max-w-[480px] md:max-w-[94%] lg:max-w-[1096px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-8 lg:gap-12 xl:gap-[84px]">
         
-        <div className="w-full md:w-[48%] lg:w-[540px] xl:w-[590px] h-[240px] sm:h-[300px] md:h-[360px] lg:h-[400px] xl:h-[440px] rounded-[16px] lg:rounded-[20px] overflow-hidden shrink-0">
-          <img
+        <div className="relative w-full md:w-[48%] lg:w-[540px] xl:w-[590px] h-[240px] sm:h-[300px] md:h-[360px] lg:h-[400px] xl:h-[440px] rounded-[16px] lg:rounded-[20px] overflow-hidden shrink-0">
+          <Image
             src="/Career.png"
             alt="Careers at Coca-Cola"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
 

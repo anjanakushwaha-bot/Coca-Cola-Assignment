@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
+import Image from 'next/image';
 
 const slides = [
   {
@@ -86,10 +87,11 @@ export default function Impact() {
 
       <div className="relative z-10 w-full max-w-[400px] lg:max-w-[1240px] min-h-[480px] lg:h-[440px] rounded-[24px] lg:rounded-[32px] shadow-2xl overflow-hidden flex flex-col lg:flex-row items-stretch bg-white lg:bg-transparent">
         
-        <img
+        <Image
           src="/coco-cola bottle.png"
           alt="Coca-Cola Frame Mask"
-          className="hidden lg:block absolute inset-0 w-full h-full object-fill z-0 pointer-events-none select-none"
+          fill
+          className="hidden lg:block object-fill z-0 pointer-events-none select-none"
         />
 
         <div className="relative z-10 flex-1 flex flex-col justify-between lg:justify-center p-6 sm:p-8 lg:py-8 xl:py-10 lg:pl-[310px] min-[1150px]:pl-[350px] xl:pl-[360px] lg:pr-6 xl:pr-8">

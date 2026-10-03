@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -21,10 +22,12 @@ export default function Header() {
         
         <Link href="/" className="flex items-center shrink-0">
           <div className="w-[165px] h-[27px] min-[992px]:w-[210px] xl:w-[264px] min-[992px]:h-[35px] xl:h-[39px] relative flex items-center">
-            <img
+            <Image
               src="/Desktop Logo.svg"
               alt="Coca-Cola Logo"
-              className="w-full h-full object-contain object-left"
+              fill
+              priority
+              className="object-contain object-left"
             />
           </div>
         </Link>

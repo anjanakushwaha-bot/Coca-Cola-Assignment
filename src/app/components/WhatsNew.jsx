@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const articles = [
   {
@@ -77,10 +78,11 @@ export default function WhatsNew() {
               className="group flex flex-col shrink-0 w-[253px] lg:w-full snap-start cursor-pointer"
             >
               <div className="relative w-[253px] h-[170px] lg:w-full lg:h-[220px] xl:h-[260px] rounded-[16px] lg:rounded-[20px] overflow-hidden bg-neutral-100 shrink-0">
-                <img
+                <Image
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
                 <div className="absolute top-0 right-0 w-11 h-11 bg-white rounded-bl-[16px] flex items-center justify-center shadow-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 pointer-events-none">

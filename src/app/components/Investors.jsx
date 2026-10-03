@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
+import Image from 'next/image';
 
 const cards = [
   {
@@ -113,10 +114,11 @@ export default function Investors() {
               style={{ flexGrow: i === 0 ? 3.2 : 1 }}
               className="relative shrink-0 w-[253px] h-[308px] rounded-[12px] overflow-hidden snap-start bg-[#1a1a1a] outline-none focus-visible:ring-2 focus-visible:ring-white lg:w-auto lg:basis-0 lg:shrink lg:min-w-0 lg:h-[372px] lg:rounded-[20px] group"
             >
-              <img
+              <Image
                 src={item.img}
                 alt={item.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                className=" object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_35.24%,rgba(0,0,0,0.9)_90.96%)] pointer-events-none" />
