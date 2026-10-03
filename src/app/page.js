@@ -5,11 +5,13 @@ import Impact from "./components/Impact";
 import Careers from "./components/Careers";
 import WhatsNew from "./components/WhatsNew";
 import QuickLinksDisclaimer from "./components/QuickLinks";
+import Big from "./components/TheBiggerPicture";
 export default function Home() {
   return (
     <>
       <Hero />
       <Reach/>
+      <Big/>
       <Investors/>
       <Impact/>
       <Careers/>
