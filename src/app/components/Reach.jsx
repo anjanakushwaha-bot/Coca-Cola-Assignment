@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import SectionHeading from './ui-reuseable/SectionHeading';
 
 const slides = [
   {
@@ -124,15 +125,13 @@ export default function Reach() {
       className="w-full bg-black text-white pt-16 pb-20 px-5 sm:px-6 lg:pt-20 lg:pb-28 lg:px-12 select-none cursor-pointer"
     >
       <div className="max-w-[1320px] mx-auto">
-        <div className="text-center lg:text-left">
-          <span className="block uppercase font-heading text-[10px] leading-[1.8] tracking-[1.4px] text-[#C3C3C3] mb-2 lg:text-[12px] lg:leading-normal lg:tracking-[0.08em] lg:text-[#999999] lg:mb-3 font-normal">
-            Our Reach
-          </span>
-          <h2 className="text-white text-[24px] leading-[1.5] sm:text-[36px] lg:text-[48px] lg:leading-[1.2] font-normal mb-[26px] lg:mb-14">
-            A Lot Goes Into <br className="lg:hidden" />
-            Reaching Millions
-          </h2>
-        </div>
+        <SectionHeading
+          align="left"
+          theme="light-text"
+          eyebrow="Our Reach"
+          title={<>A Lot Goes Into <br className="lg:hidden" /> Reaching Millions</>}
+          className="text-center lg:text-left mb-[26px] lg:mb-14"
+        />
 
         <div className="flex flex-col lg:flex-row items-center gap-9 lg:gap-[81px]">
           <div className="w-full lg:flex-1 self-stretch h-[230px] sm:h-[400px] lg:h-[646px]">

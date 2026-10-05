@@ -1,15 +1,19 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import SectionHeading from './ui-reuseable/SectionHeading';
+import Button from './ui-reuseable/Button';
+import ProgressBar from './ui-reuseable/ProgressBar';
 
 const articles = [
   {
     id: 'news-1',
     date: '18 Dec',
     readTime: '5 min read',
-    title: 'Hindustan Coca-Cola Beverages Certified as a Top Employer in India for 2026 by Top Employer...',
+    title:
+      'Hindustan Coca-Cola Beverages Certified as a Top Employer in India for 2026 by Top Employers Institute',
     img: '/reach-2.jpeg',
     href: '',
   },
@@ -17,7 +21,8 @@ const articles = [
     id: 'news-2',
     date: '18 Dec',
     readTime: '5 min read',
-    title: 'Hindustan Coca-Cola Beverages Hands Over Push Carts and Infrastructure Support to Women SHGs...',
+    title:
+      'Hindustan Coca-Cola Beverages Hands Over Push Carts and Infrastructure Support to Women SHGs, Strengthening Women-Led Micr...',
     img: '/reach-4.jpeg',
     href: '',
   },
@@ -25,59 +30,160 @@ const articles = [
     id: 'news-3',
     date: '18 Dec',
     readTime: '5 min read',
-    title: 'HCCB Launches First-of-its-Kind High-Speed Kinley Water Production Line at Avinya Facility in Telangana',
+    title:
+      'HCCB Launches First-of-its-Kind High-Speed Kinley Water Production Line at Avinya Facility in Telangana',
     img: '/reach-3.jpeg',
+    href: '',
+  },
+  {
+    id: 'news-4',
+    date: '18 Dec',
+    readTime: '5 min read',
+    title:
+      'Hindustan Coca-Cola Beverages Certified as a Top Employer in India for 2026 by Top Employers Institute',
+    img: '/reach-2.jpeg',
+    href: '',
+  },
+  {
+    id: 'news-5',
+    date: '18 Dec',
+    readTime: '5 min read',
+    title:
+      'Hindustan Coca-Cola Beverages Hands Over Push Carts and Infrastructure Support to Women SHGs, Strengthening Women-Led Micr...',
+    img: '/reach-4.jpeg',
     href: '',
   },
 ];
 
 export default function WhatsNew() {
+  const scrollRef = useRef(null);
   const progressRef = useRef(null);
+  const totalCards = articles.length;
+  const initialWidth = Math.max(15, 100 / totalCards);
 
-  const handleScroll = (e) => {
-    const el = e.currentTarget;
+  const updateProgress = (el) => {
     const maxScroll = el.scrollWidth - el.clientWidth;
     if (maxScroll <= 0 || !progressRef.current) return;
 
     const progress = Math.min(Math.max(el.scrollLeft / maxScroll, 0), 1);
-    const barWidth = 33.33 + progress * 66.67;
+    const barWidth = initialWidth + progress * (100 - initialWidth);
     progressRef.current.style.width = `${barWidth}%`;
   };
+
+  const handleScroll = (e) => {
+    updateProgress(e.currentTarget);
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let targetScroll = el.scrollLeft;
+    let animFrame = null;
+
+    const smoothLoop = () => {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+      const diff = targetScroll - el.scrollLeft;
+
+      if (Math.abs(diff) > 0.5) {
+        el.scrollLeft += diff * 0.12;
+        animFrame = requestAnimationFrame(smoothLoop);
+      } else {
+        el.scrollLeft = targetScroll;
+        cancelAnimationFrame(animFrame);
+        animFrame = null;
+      }
+    };
+
+    const handleWheel = (e) => {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const isAtStart = el.scrollLeft <= 0 && e.deltaY < 0;
+      const isAtEnd = el.scrollLeft >= maxScroll - 2 && e.deltaY > 0;
+
+      if (!isAtStart && !isAtEnd) {
+        e.preventDefault();
+        targetScroll += e.deltaY * 1.5;
+        if (!animFrame) {
+          animFrame = requestAnimationFrame(smoothLoop);
+        }
+      }
+    };
+
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    const handleMouseDown = (e) => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollStart = el.scrollLeft;
+      targetScroll = el.scrollLeft;
+      if (animFrame) cancelAnimationFrame(animFrame);
+    };
+
+    const handleMouseLeaveOrUp = () => {
+      isDown = false;
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.3;
+      el.scrollLeft = scrollStart - walk;
+      targetScroll = el.scrollLeft;
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    el.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseLeaveOrUp);
+    el.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      if (animFrame) cancelAnimationFrame(animFrame);
+      el.removeEventListener('wheel', handleWheel);
+      el.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseLeaveOrUp);
+      el.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return (
     <section className="w-full bg-white pt-[60px] pb-16 lg:py-24 px-5 select-none overflow-hidden">
       <div className="w-full max-w-[1320px] mx-auto">
-        
         <div className="flex items-end justify-between mb-8 lg:mb-[49px]">
-          <div>
-            <span className="font-heading text-[10px] leading-[18px] tracking-[1.4px] lg:text-[12px] lg:leading-[24px] lg:tracking-[1.68px] text-[#5C5C5C] uppercase block mb-1">
-              WHAT&apos;S NEW
-            </span>
-            <h2 className="text-[24px] leading-[36px] lg:text-[40px] lg:leading-[140%] text-black font-normal tracking-tight">
-              Fresh From Our World
-            </h2>
-          </div>
+          <SectionHeading
+            align="left"
+            eyebrow="WHAT'S NEW"
+            title="Fresh From Our World"
+          />
 
-          <Link
+          <Button
             href="/news"
-            className="hidden lg:inline-flex font-heading items-center justify-center px-6 py-[10px] lg:px-7 lg:py-[12px] rounded-[8px] bg-black text-white text-[14px] leading-[20px] lg:text-[16px] hover:bg-neutral-800 transition-colors shrink-0"
+            variant="black"
+            className="hidden lg:inline-flex shrink-0"
           >
             Read More
-          </Link>
+          </Button>
         </div>
 
         <div
+          ref={scrollRef}
           onScroll={handleScroll}
-          className="flex lg:grid lg:grid-cols-3 gap-5 lg:gap-6 xl:gap-[28px] overflow-x-auto lg:overflow-visible snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-4 lg:pb-0 w-full"
+          className="flex gap-5 lg:gap-6 xl:gap-[28px] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-4 w-full cursor-grab active:cursor-grabbing will-change-scroll"
         >
           {articles.map((item) => (
             <Link
               key={item.id}
               href={item.href}
               aria-label={item.title}
-              className="group flex flex-col shrink-0 w-[253px] lg:w-full snap-start cursor-pointer"
+              draggable={false}
+              className="group flex flex-col shrink-0 w-[253px] lg:w-[390px] xl:w-[410px] cursor-pointer"
             >
-              <div className="relative w-[253px] h-[170px] lg:w-full lg:h-[220px] xl:h-[260px] rounded-[16px] lg:rounded-[20px] overflow-hidden bg-neutral-100 shrink-0">
+              <div className="relative w-full h-[170px] lg:h-[220px] xl:h-[260px] rounded-[16px] lg:rounded-[20px] overflow-hidden bg-neutral-100 shrink-0 pointer-events-none">
                 <Image
                   src={item.img}
                   alt={item.title}
@@ -118,23 +224,17 @@ export default function WhatsNew() {
           ))}
         </div>
 
-        <div className="w-full h-[2px] bg-[#E5E5E5] rounded-full overflow-hidden mt-6 lg:hidden">
-          <div
-            ref={progressRef}
-            className="h-full bg-[#FC620F] rounded-full transition-all duration-150 ease-out"
-            style={{ width: '33.33%' }}
-          />
-        </div>
+        <ProgressBar
+          progressRef={progressRef}
+          initialWidth={`${initialWidth}%`}
+          className="mt-6 lg:mt-10"
+        />
 
         <div className="mt-8 lg:hidden">
-          <Link
-            href="/news"
-            className="font-heading inline-flex items-center justify-center px-7 py-[12px] rounded-[8px] bg-black text-white text-[14px] leading-[20px] hover:bg-neutral-800 transition-colors"
-          >
+          <Button href="/news" variant="black">
             Read More
-          </Link>
+          </Button>
         </div>
-
       </div>
     </section>
   );

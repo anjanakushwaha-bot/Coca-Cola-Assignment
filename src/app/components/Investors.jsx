@@ -4,6 +4,9 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import Image from 'next/image';
+import SectionHeading from './ui-reuseable/SectionHeading';
+import Button from './ui-reuseable/Button';
+import ProgressBar from './ui-reuseable/ProgressBar';
 
 const cards = [
   {
@@ -86,25 +89,20 @@ export default function Investors() {
   };
 
   return (
-    <section className="w-full bg-white select-none">      
+    <section className="w-full bg-white select-none">
       <div className="w-full bg-black rounded-t-[32px] sm:rounded-t-[40px] lg:rounded-t-[48px] py-[60px] lg:py-20 lg:px-6 min-[1368px]:px-0 overflow-hidden">
-        <div className="max-w-[1320px] mx-auto">
-          
-          <div className="px-5 lg:px-0 text-center">
-            <span className="block uppercase font-heading text-[10px] leading-[1.8] tracking-[1.4px] lg:text-[12px] lg:leading-[24px] lg:tracking-[1.68px] text-[#C3C3C3] font-normal mb-2">
-              For Investors
-            </span>
-            <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight">
-              Stay Close to Our Story
-            </h2>
-            <p className="mt-4 lg:mt-6 mx-auto max-w-[300px] lg:max-w-[420px] text-[14px] leading-[1.6] lg:text-[16px] text-[#E5E5E5] font-normal">
-              The latest financial information, updates and key resources, all in one place
-            </p>
-          </div>
+        <div className="max-w-[1320px] mx-auto px-5 lg:px-0">
+          <SectionHeading
+            align="center"
+            theme="light-text"
+            eyebrow="For Investors"
+            title="Stay Close to Our Story"
+            desc="The latest financial information, updates and key resources, all in one place"
+          />
 
           <div
             onScroll={handleMobileScroll}
-            className="mt-10 lg:mt-[54px] flex gap-5 px-5 lg:px-0 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-pl-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:h-[372px] lg:items-center"
+            className="mt-10 lg:mt-[54px] flex gap-5 overflow-x-auto lg:overflow-visible snap-x snap-mandatory scroll-pl-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:h-[372px] lg:items-center"
           >
             {cards.map((item, i) => (
               <Link
@@ -144,7 +142,16 @@ export default function Investors() {
                       active === i ? 'opacity-100' : 'lg:opacity-0'
                     }`}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <line x1="7" y1="17" x2="17" y2="7" />
                       <polyline points="7 7 17 7 17 17" />
                     </svg>
@@ -153,26 +160,17 @@ export default function Investors() {
               </Link>
             ))}
           </div>
-
-          <div className="lg:hidden mt-5 px-5">
-            <div className="h-px w-full bg-[#262626] rounded-[10px] overflow-hidden">
-              <div
-                ref={progressRef}
-                style={{ width: `${100 / cards.length}%` }}
-                className="h-full bg-[#FC620F] rounded-[10px]"
-              />
-            </div>
-          </div>
+          <ProgressBar
+            progressRef={progressRef}
+            initialWidth={`${100 / cards.length}%`}
+            className="mt-6 lg:hidden"
+          />
 
           <div className="flex justify-center mt-10 lg:mt-[54px]">
-            <Link
-              href="#investors"
-              className="font-heading inline-flex items-center px-6 py-[10px] lg:px-7 lg:py-[13px] rounded-[8px] bg-white text-black text-[14px] leading-[1.6] lg:text-[16px] font-normal hover:bg-neutral-200 transition-colors"
-            >
+            <Button href="#investors" variant="white">
               Explore Investors
-            </Link>
+            </Button>
           </div>
-
         </div>
       </div>
     </section>

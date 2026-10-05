@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Link from 'next/link';
 import gsap from 'gsap';
 import Image from 'next/image';
+import SectionHeading from './ui-reuseable/SectionHeading';
+import Button from './ui-reuseable/Button';
 
 const slides = [
   {
@@ -96,17 +97,12 @@ export default function Impact() {
 
         <div className="relative z-10 flex-1 flex flex-col justify-between lg:justify-center p-6 sm:p-8 lg:py-8 xl:py-10 lg:pl-[310px] min-[1150px]:pl-[350px] xl:pl-[360px] lg:pr-6 xl:pr-8">
           <div ref={textWrap}>
-            <span className="font-heading text-[10px] leading-[18px] tracking-[1.4px] lg:text-[11px] xl:text-[12px] lg:leading-[20px] xl:leading-[22px] tracking-[1.68px] text-[#5C5C5C] uppercase block mb-1">
-              {item.tag}
-            </span>
-
-            <h2 className="text-[24px] leading-[32px] lg:text-[28px] lg:leading-[36px] min-[1150px]:text-[32px] min-[1150px]:leading-[38px] xl:text-[38px] xl:leading-[120%] text-black font-normal tracking-tight max-w-[480px]">
-              {item.title}
-            </h2>
-
-            <p className="text-[14px] leading-[22px] lg:text-[13.5px] lg:leading-[20px] xl:text-[15px] xl:leading-[24px] text-[#343434] mt-2 max-w-[440px]">
-              {item.desc}
-            </p>
+            <SectionHeading
+              align="left"
+              eyebrow={item.tag}
+              title={item.title}
+              desc={item.desc}
+            />
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-4 my-6 lg:hidden">
               {item.stats.map((st, i) => (
@@ -122,13 +118,13 @@ export default function Impact() {
             </div>
 
             <div className="mt-0 lg:mt-8">
-              <Link
+              <Button
                 href={item.ctaLink}
+                variant="black"
                 onClick={(e) => e.stopPropagation()}
-                className="font-heading inline-flex items-center justify-center px-6 py-[10px] lg:px-7 lg:py-[12px] rounded-[8px] bg-black text-white text-[14px] leading-[22.4px] lg:text-[15px] xl:text-[16px] hover:bg-neutral-800 transition-colors"
               >
                 {item.ctaText}
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
