@@ -17,14 +17,14 @@ export default function QuickLinks() {
     <section className="w-full bg-white pt-10 pb-16 lg:py-20 px-5 select-none">
       <div className="w-full max-w-[1320px] mx-auto">
         
-        <div className="grid grid-cols-2 justify-items-start sm:justify-items-center gap-x-4 sm:gap-x-8 gap-y-6 px-1 sm:px-4 lg:px-0 lg:flex lg:items-center lg:justify-center lg:gap-[48px]">
+      <div className="grid grid-cols-1 min-[400px]:grid-cols-2 justify-items-start gap-y-4 min-[400px]:gap-x-4 min-[400px]:gap-y-6 lg:flex lg:items-center lg:justify-between xl:justify-center lg:gap-6 xl:gap-[48px]">
           {links.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               className="group inline-flex items-center gap-2 lg:gap-4 cursor-pointer shrink-0"
             >
-              <span className="text-[18px] sm:text-[22px] lg:text-[36px] lg:leading-[140%] text-black font-normal tracking-tight group-hover:text-neutral-700 transition-colors">
+             <span className="text-[16px] min-[400px]:text-[18px] sm:text-[22px] lg:text-[24px] xl:text-[36px] lg:leading-[140%] text-black font-normal tracking-tight group-hover:text-neutral-700 transition-colors whitespace-nowrap">
                 {item.label}
               </span>
 

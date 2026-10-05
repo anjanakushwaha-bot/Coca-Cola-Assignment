@@ -162,10 +162,10 @@ export default function Reach() {
                   style={{ opacity: i === 0 ? 1 : 0.2 }}
                   className="flex flex-col justify-center shrink-0 text-center lg:text-left lg:h-[142px]"
                 >
-                  <div className="font-heading text-[32px] leading-[1.4] lg:text-[72px] lg:leading-none lg:tracking-[-0.02em] font-normal">
+                  <div className="font-heading text-[32px] leading-[1.4] lg:text-[80px] lg:leading-none lg:tracking-[-0.02em] font-normal">
                     {item.num}
                   </div>
-                  <div className="text-[14px] leading-[1.6] text-[#E5E5E5] lg:text-[16px] lg:leading-normal lg:text-[#A0A0A0] lg:mt-3 font-normal">
+                  <div className="text-[14px] leading-[1.6] text-[#E5E5E5] lg:text-[18px] lg:leading-normal lg:text-[#A0A0A0] lg:mt-3 font-normal">
                     {item.desc}
                   </div>
                 </div>
