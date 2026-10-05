@@ -25,6 +25,10 @@
 }
 
 :root {
+  /* Font variables connect karein */
+  --font-heading: 'TCCC-UnityHeadline', sans-serif;
+  --font-body: 'TCCC-UnityText', sans-serif;
+
   --coke-red: #F50001;
   --neutral-100: #E5E5E5;
   --neutral-200: #DBDBDB;

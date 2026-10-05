@@ -152,7 +152,7 @@ export default function WhatsNew() {
   }, []);
 
   return (
-    <section className="w-full bg-white pt-[60px] pb-16 lg:py-24 px-5 select-none overflow-hidden">
+    <section className="w-full bg-white pt-[0px] pb-16 lg:pt-0 lg:pb-24 px-5 select-none overflow-hidden">
       <div className="w-full max-w-[1320px] mx-auto">
         <div className="flex items-end justify-between mb-8 lg:mb-[49px]">
           <SectionHeading
